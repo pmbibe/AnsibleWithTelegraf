@@ -1,5 +1,5 @@
 ---
-- name: Write vars
+- name: HelloWorld
   hosts: all
 
   tasks:
@@ -7,3 +7,7 @@
     loop: "{{ hostList }}"
     when: " item.hostname == ansible_hostname "
     template: src=telegraf.conf dest=/etc/telegraf/telegraf.conf
+  - name: Reload service telegraf, in all cases
+    service:
+      name: telegraf
+      state: reloaded
