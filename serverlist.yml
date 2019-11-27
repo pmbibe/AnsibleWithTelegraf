@@ -1,0 +1,9 @@
+---
+- name: Write vars
+  hosts: all
+
+  tasks:
+  - name: "Change config telegraf"
+    loop: "{{ hostList }}"
+    when: " item.hostname == ansible_hostname "
+    template: src=telegraf.conf dest=/etc/telegraf/telegraf.conf
