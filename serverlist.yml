@@ -3,6 +3,12 @@
   hosts: all
 
   tasks:
+  - name: "Installing repo telegraf"
+    template: src=influxdb.repo dest=/etc/yum.repos.d/influxdb.repo
+  - name: "Installing telegraf"
+    yum:
+      name: telegraf
+      state: latest 
   - name: "Change config telegraf"
     loop: "{{ hostList }}"
     when: " item.hostname == ansible_hostname "
